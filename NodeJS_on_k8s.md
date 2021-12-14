@@ -1,5 +1,5 @@
-# Let's Deploy our first NodeJS Application on Kubernetes
-The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometime due to lack to recourses it becomes difficult to run our data or application on Kubernetes. Here in this blog we are going to dockerize and run a NodeJS application on Kubernetes.
+# Let's Deploy our first NodeJS application on Kubernetes
+The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometimes due to lack of recourses, it becomes difficult to run our data or application on Kubernetes. Here in this blog, we are going to dockerize and run a NodeJS application on Kubernetes.
 
 ## Requirement's or Prerequisite's
 - NodeJS and ExpressJS fundamentals
@@ -21,7 +21,7 @@ The very need to make our complex application highly available, scalable, portab
     # Copying package.json to root directory of the virtual docker container.
     COPY package*.json ./
     
-    # After copying the package.json we'll run npm install command to install all the dependencies inside the docker virtual container
+    # After copying the package.json we'll run the npm install command to install all the dependencies inside the docker virtual container
     RUN npm install
     
     # Copying everything from my directory where I've kept my Dockerfile to the docker container
@@ -30,19 +30,19 @@ The very need to make our complex application highly available, scalable, portab
     # Here I'm exposing the port for testing purposes
     EXPOSE 3000
     
-    # Name of my NodeJS application is server.js, you may have index.js or app.js, replace it as per your requirement
+    # The name of my NodeJS application is server.js, you may have index.js or app.js, replace it as per your requirement
     CMD ["node", "server.js"]
    ```
 
-- Make a `deployment.yaml` file that will allow to describe an application's life cycle. 
+- Make a `deployment.yaml` file that will allow describing an application's life cycle. 
   > Such as, which images to use for the app, the number of pods there should be, and the way in which they should be updated.
 - Make a `serive.yaml` file that will help us in keeping track of all **running pod's IP address** so that all running pods inside that **cluster** can communicate with each other.
 - Make a `ingress.yaml` file if you want to manage external user's access to the services in your kubernetes cluster.
 
-#### Enough taking! let's dive into an example 
-   Let's assume we have an image of a NodeJS application which is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
+#### Enough talking! let's dive into an example 
+   Let's assume we have an image of a NodeJS application that is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
    
-   then all these *.yaml* files listed below might be a relevant for us
+   then all these *.yaml* files listed below might be relevant for us
    
 -   `deployment.yaml` file
    
@@ -126,15 +126,15 @@ spec:
               number: 3000
 ```
  
-## Deploying our Application to a cluster
+## Deploying our application to a cluster
 Make sure of the connection to the cluster where you want to deploy the application, this check can be done using 
 ```
 kubectl service-info
 ```
-If you are not getting your running cluster info then you might need to configure it properly, a follow-up recource to get this done can be [this](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/).
+If you are not getting your running cluster-info then you might need to configure it properly, a follow-up resource  to get this done can be [this](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/).
 If you are ready to go and your cluster is running properly then you're almost at the end of deployment. 
 
-Now, we only have to run `kubectl apply` command with a flag `-f` which means we are applying all of the mentioned rules in all the 3 respective file. Then it'll create pods  which can be deployed to the production.
+Now, we only have to run the `kubectl apply` command with a flag `-f` which means we are applying all of the mentioned rules in all the 3 respective files. Then it'll create pods that can be deployed to the production.
 So, run all of these 3 commands in order 
 ```
 kubectl apply -f deployment.yaml`
@@ -146,15 +146,15 @@ kubectl apply -f service.yaml
 kubectl apply -f ingress.yaml
 ```
 
-Now, take a pause and drink some coffee because we've already came a long way to here. After that make sure to check the status of each pods that we have defined in our `deployment.yaml`, In our case we have defined 3 replicas so there must be at least 3 pods visible to us.  
+Now, take a pause and drink some coffee because we've already come a long way to here. After that make sure to check the status of each pod that we have defined in our `deployment.yaml`, In our case we have defined 3 replicas so there must be at least 3 pods visible to us.  
 ```
 kubectl get pods
 ```
 This command will list all the pods that are present in our cluster, check the **status of the pod**, if it shows "RUNNING" then we had successfully deployed our application to the cluster. 
 
-If you are using **REMOTE CLUSTER** then you may cross check your application at the host defined in `ingress.yaml`.
+If you are using **REMOTE CLUSTER** then you may cross-check your application at the host defined in `ingress.yaml`.
 
-Or if you want to test it in your localhost then try **forwarding the port** of any of the running pod to your localhost. This can be achieved using the command 
+Or if you want to test it in your localhost then try **forwarding the port** of any of the running pods to your localhost. This can be achieved using the command 
  ```
     kubectl port-forward POD_NAME 3000:3000
  ``` 
@@ -162,6 +162,6 @@ Or if you want to test it in your localhost then try **forwarding the port** of 
 Here we are forwarding the port of the service to the port 3000 of our local machine. Now we can easily test our application on  `http://localhost:3000`.
 So time to sign-off with this thought
 
-**And a big thankyou for being here, hope this blog has solved each and every chunk of doubt or problem that you may have. If you took at least one of idea from this blog then my efforts are successfull.** 
+**And a big thank you for being here, hope this blog has solved each and every chunk of doubt or problem that you may have. If you took at least one of any ideas from this blog then my efforts are successful.** 
 
-**Wish you all a very productive 2021 and blissful #HappyNewYear, May you fly high in life & success be with you always.**
+**Wish you all a very productive 2022 and blissful #HappyNewYear, May you fly high in life and success be with you always.**
