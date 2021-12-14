@@ -1,28 +1,52 @@
-# Running a NodeJS application on Kubernetes
+# Let's Deploy our first NodeJS Application on Kubernetes
 The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometime due to lack to recourses it becomes difficult to run our data or application on Kubernetes. Here in this blog we are going to dockerize and run a NodeJS application on Kubernetes.
 
-## Prerequisite's
+## Requirement's or Prerequisite's
 - NodeJS and ExpressJS fundamentals
 - Familarity with Docker
 - Basic knowledge of Kubernetes
   > Like- Pods, Services, Ingress, etc
 
-## Steps to follow 
-- [ ] Dockerize the application by making a `Dockerfile` and push it to docker hub.
+## Steps to follow:
+- Dockerize a NodeJS application by making a `Dockerfile` and push it to docker hub.
   > Useful Resources : [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
-- [ ] Make a `deployment.yaml` file that will allow to describe an application's life cycle. 
-  > Such as, which images to use for the app, the number of pods there should be, and the way in which they should be updated.
-- [ ] Make a `serive.yaml` file that will help us in keeping track of all **running pod's IP address** so that all running pods inside that **cluster** can communicate with each other.
-- [ ] Make a `ingress.yaml` file if you want to manage external user's access to the services in your kubernetes cluster.
+  
+  > An example of a Dockerfile can be this :
+   ```yaml
+    # Here, I'm using node version 14.17.0 but feel free to replace it with yours. 
+    # You can check your node version with node -v
+    FROM node:14.17.0
+    WORKDIR /usr/src/app
+    
+    # Copying package.json to root directory of the virtual docker container.
+    COPY package*.json ./
+    
+    # After copying the package.json we'll run npm install command to install all the dependencies inside the docker virtual container
+    RUN npm install
+    
+    # Copying everything from my directory where I've kept my Dockerfile to the docker container
+    COPY . .
+    
+    # Here I'm exposing the port for testing purposes
+    EXPOSE 3000
+    
+    # Name of my NodeJS application is server.js, you may have index.js or app.js, replace it as per your requirement
+    CMD ["node", "server.js"]
+   ```
 
-#### Example 
-   Lets assume we have an image of a nodeJS application which is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
+- Make a `deployment.yaml` file that will allow to describe an application's life cycle. 
+  > Such as, which images to use for the app, the number of pods there should be, and the way in which they should be updated.
+- Make a `serive.yaml` file that will help us in keeping track of all **running pod's IP address** so that all running pods inside that **cluster** can communicate with each other.
+- Make a `ingress.yaml` file if you want to manage external user's access to the services in your kubernetes cluster.
+
+#### Enough taking! let's dive into an example 
+   Let's assume we have an image of a NodeJS application which is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
    
    then all these *.yaml* files listed below might be a relevant for us
    
 -   `deployment.yaml` file
    
-   ```
+   ```yaml
     apiVersion: apps/v1
     # Specifying the kind as Deployment 
     # because we want to deploy our application
@@ -54,7 +78,7 @@ The very need to make our complex application highly available, scalable, portab
   
 -   `service.yaml` file
    
-   ```
+   ```yaml
     apiVersion: v1
     # Specifying the kind as Service 
     # because we want to define our pod type to communicate with each other inside the cluster
@@ -68,12 +92,13 @@ The very need to make our complex application highly available, scalable, portab
       - port: 3000
         targetPort: 3000
       # To create stable IP address that is accessible from nodes in the cluster
+      # If we'll not define the type of service then it'll be ClusterIP by default
       type: ClusterIP  
   ```
   
  -  `ingress.yaml` file
  
-  ```
+  ```yaml
     apiVersion: networking.k8s.io/v1
      # Specifying the kind as Ingress 
     # because we want's to manage the external user to our service 
@@ -86,7 +111,7 @@ metadata:
 spec:
   rules:
   # Defining rules such as 
-  #Providing the cluster name, DNS_NAME (where we want this image to be visible)
+  # Providing the cluster name, DNS_NAME (where we want this image to be visible)
   - host: test-app.<DNS_NAME>
     http:
       paths:
@@ -97,7 +122,7 @@ spec:
           # Specifying the name of the service that the pods are using
             name: test-app-svc
             port: 
-            # Specifying the exposed PORT
+            # Specifying the PORT to map with the service 
               number: 3000
 ```
  
@@ -132,4 +157,11 @@ If you are using **REMOTE CLUSTER** then you may cross check your application at
 Or if you want to test it in your localhost then try **forwarding the port** of any of the running pod to your localhost. This can be achieved using the command 
  ```
     kubectl port-forward POD_NAME 3000:3000
-```          
+ ``` 
+ 
+Here we are forwarding the port of the service to the port 3000 of our local machine. Now we can easily test our application on  `http://localhost:3000`.
+So time to sign-off with this thought
+
+**And a big thankyou for being here, hope this blog has solved each and every chunk of doubt or problem that you may have. If you took at least one of idea from this blog then my efforts are successfull.** 
+
+**Wish you all a very productive 2021 and blissful #HappyNewYear, May you fly high in life & success be with you always.**
