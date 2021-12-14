@@ -113,3 +113,8 @@ kubectl get pods
 This command will list all the pods that are present in our cluster, check the **status of the pod**, if it shows "RUNNING" then we had successfully deployed our application to the cluster. 
 
 If you are using **REMOTE CLUSTER** then you may cross check your application at the host defined in `ingress.yaml`.
+
+Or if you want to test it in your localhost then try **forwarding the port** of any of the running pod to your localhost. This can be achieved using the command 
+ ```
+    kubectl port-forward POD_NAME 3000:3000
+```          
