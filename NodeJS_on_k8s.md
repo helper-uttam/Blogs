@@ -1,9 +1,9 @@
 # Running a NodeJS application on Kubernetes
-The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometime due to lack to recourses it becomes difficult to run our data or application on Kubernetes. Here in this blog we are going to dockerize and run an image on Kubernetes.
+The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometime due to lack to recourses it becomes difficult to run our data or application on Kubernetes. Here in this blog we are going to dockerize and run a NodeJS application on Kubernetes.
 
 ## Prerequisite's
 - NodeJS and ExpressJS fundamentals
-- Good hold on Docker
+- Familarity with Docker
 - Basic knowledge of Kubernetes
   > Like- Pods, Services, Ingress, etc
 
@@ -16,14 +16,16 @@ The very need to make our complex application highly available, scalable, portab
 - [ ] Make a `ingress.yaml` file if you want to manage external user's access to the services in your kubernetes cluster.
 
 #### Example 
-   Lets assume we have an image of a nodeJS application which is kept on DockerHub. And we have exposed the port to 3000 in the Dockerfile,
+   Lets assume we have an image of a nodeJS application which is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
    
-   then all these *.yaml* files can be a relevant 
+   then all these *.yaml* files listed below might be a relevant for us
    
 -   `deployment.yaml` file
    
    ```
     apiVersion: apps/v1
+    # Specifying the kind as Deployment 
+    # because we want to deploy our application
     kind: Deployment
     metadata:
       name: test-app-1
@@ -38,12 +40,15 @@ The very need to make our complex application highly available, scalable, portab
         spec:
           containers:
           - name: test-app-1
+          # Specify your DockerHub image 
             image: <Dockerhub username/image_name>
             resources:
+            # Specifying the resourses that we might need for our application
               limits:
                 memory: "128Mi"
                 cpu: "500m"
             ports:
+            # Exposed PORT
             - containerPort: 3000
   ```
   
@@ -51,6 +56,8 @@ The very need to make our complex application highly available, scalable, portab
    
    ```
     apiVersion: v1
+    # Specifying the kind as Service 
+    # because we want to define our pod type to communicate with each other inside the cluster
     kind: Service
     metadata:
       name: test-app-svc
@@ -60,6 +67,7 @@ The very need to make our complex application highly available, scalable, portab
       ports:
       - port: 3000
         targetPort: 3000
+      # To create stable IP address that is accessible from nodes in the cluster
       type: ClusterIP  
   ```
   
@@ -67,13 +75,18 @@ The very need to make our complex application highly available, scalable, portab
  
   ```
     apiVersion: networking.k8s.io/v1
+     # Specifying the kind as Ingress 
+    # because we want's to manage the external user to our service 
 kind: Ingress
 metadata:
+# Naming our Ingress
   name: test-app-ingress
   labels:
     name: test-app-ingress
 spec:
   rules:
+  # Defining rules such as 
+  #Providing the cluster name, DNS_NAME (where we want this image to be visible)
   - host: test-app.<DNS_NAME>
     http:
       paths:
@@ -81,8 +94,10 @@ spec:
         path: "/"
         backend:
           service:
+          # Specifying the name of the service that the pods are using
             name: test-app-svc
             port: 
+            # Specifying the exposed PORT
               number: 3000
 ```
  
