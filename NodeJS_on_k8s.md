@@ -1,5 +1,5 @@
 # Let's Deploy our first NodeJS application on Kubernetes
-The very need to make our complex application highly available, scalable, portable, and deployable in small modules independently lead to the birth of Kubernetes. And sometimes due to lack of recourses, it becomes difficult to run our data or application on Kubernetes. Here in this blog, we are going to dockerize and run a NodeJS application on Kubernetes.
+Managing one or two containers can be easy for developers like us but when we are given the task to manage hundreds of containers then we might need a container orchestration tool and this gave birth to Kubernetes. And sometimes due to lack of recourses, it becomes difficult to run our data or application on Kubernetes. Here in this blog, we are going to dockerize and run a NodeJS application on Kubernetes.
 
 ## Requirement's or Prerequisite's
 - NodeJS and ExpressJS fundamentals
@@ -38,6 +38,7 @@ The very need to make our complex application highly available, scalable, portab
   > Such as, which images to use for the app, the number of pods there should be, and the way in which they should be updated.
 - Make a `serive.yaml` file that will help us in keeping track of all **running pod's IP address** so that all running pods inside that **cluster** can communicate with each other.
 - Make a `ingress.yaml` file if you want to manage external user's access to the services in your kubernetes cluster.
+<img src="https://github.com/helper-uttam/Blogs/blob/master/assets/service_architecture.png">
 
 #### Enough talking! let's dive into an example 
    Let's assume we have an image of a NodeJS application that is kept on our [DockerHub](https://hub.docker.com/) registry. And in the Dockerfile we have exposed the port of the application to 3000,
@@ -145,8 +146,14 @@ kubectl apply -f service.yaml
 ```
 kubectl apply -f ingress.yaml
 ```
+<table>
+  <tr>
+    <td> <img src="https://user-images.githubusercontent.com/72701081/146311539-96091281-5e8c-4126-8f18-9b3b9e91c3bc.gif" alt="coffee_gif"></img> </td>
+    <td> <h3>Now, take a pause and drink some coffee because we've already come a long way to here.</h3> </td>
+  </tr>
+ </table>
 
-Now, take a pause and drink some coffee because we've already come a long way to here. After that make sure to check the status of each pod that we have defined in our `deployment.yaml`, In our case we have defined 3 replicas so there must be at least 3 pods visible to us.  
+After the pause make sure to check the status of each pod that we have defined in our `deployment.yaml`, In our case we have defined 3 replicas so there must be at least 3 pods visible to us.  
 ```
 kubectl get pods
 ```
