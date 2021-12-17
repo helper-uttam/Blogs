@@ -1,5 +1,5 @@
 # Let's Deploy our first NodeJS application on Kubernetes
-Managing one or two containers can be easy for developers like us but when we are given the task to manage hundreds of containers then we might need a container orchestration tool and this gave birth to Kubernetes. And sometimes due to lack of recourses, it becomes difficult to run our data or application on Kubernetes. Here in this blog, we are going to dockerize and run a NodeJS application on Kubernetes.
+Managing one or two containers can be easy for developers like us but when we are given the task to manage hundreds of containers then we might need a container orchestration tool and this gave birth to Kubernetes. Here in this blog, we are going to dockerize and run a NodeJS application on Kubernetes.
 
 ## Requirement's or Prerequisite's
 - NodeJS and ExpressJS fundamentals
@@ -21,7 +21,8 @@ Managing one or two containers can be easy for developers like us but when we ar
     # Copying package.json to root directory of the virtual docker container.
     COPY package*.json ./
     
-    # After copying the package.json we'll run the npm install command to install all the dependencies inside the docker virtual container
+    # After copying the package.json to our virtual environment
+    # we'll run the npm install command to install all the dependencies that were mentioned in our package.json file in our docker virtual environement.
     RUN npm install
     
     # Copying everything from my directory where I've kept my Dockerfile to the docker container
@@ -135,7 +136,7 @@ kubectl service-info
 If you are not getting your running cluster-info then you might need to configure it properly, a follow-up resource  to get this done can be [this](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/).
 If you are ready to go and your cluster is running properly then you're almost at the end of deployment. 
 
-Now, we only have to run the `kubectl apply` command with a flag `-f` which means we are applying all of the mentioned rules in all the 3 respective files. Then it'll create pods that can be deployed to the production.
+Now, we only have to run the `kubectl apply` command with a flag `-f` which means we are applying all of the declared rules in all the 3 respective files. Then Kubernetes has the knowledge and logic to turn this declaration into reality and hence it'll create pods and deploy our running pods to the cluster automatically.
 So, run all of these 3 commands in order 
 ```
 kubectl apply -f deployment.yaml`
