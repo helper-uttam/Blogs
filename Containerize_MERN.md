@@ -13,7 +13,8 @@ There are many benefits of containerizing an application, but let's discuss few 
 2) It don't require any operating system, so it is independent of any operating system.
 
 ### Let's containerize the application:
-We're going to setup 3 containers for Mongo, express-server and our react-app. So, let's containerize our react-app first. 
+We're going to setup 3 containers for Mongo, express-server and our react-app. 
+#### 1. So, let's containerize our react-app first. 
 It's quite simple to dockerize a react-app with a `Dockerfile`.
 ```yml
   #here we're specifiying the version of node
