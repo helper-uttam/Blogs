@@ -12,6 +12,10 @@ There are many benefits of containerizing an application, but let's discuss few 
 1) It enables very quick, easy and scalable deployments.
 2) It don't require any operating system, so it is independent of any operating system.
 
+<img align="left" src="./assets/mern-directory.png" alt="mern-directory"></img> <br>
+**Note:-First of all you should check that you should have 2 different directories one for client side application (i.e, react-app) and other for our server file.**
+<br> <br>
+
 ### Let's containerize the application:
 We're going to setup 3 containers for Mongo, express-server and our react-app. 
 #### 1. So, let's containerize our react-app first. 
@@ -39,4 +43,8 @@ It's quite simple to dockerize a react-app with a `Dockerfile`.
 
   #starting the application
   CMD ["npm", "start"]
+```
+Now with the help of this `Dockerfile` we can build and contairize our react-app, **to build this application using Dockerfile run this command inside your client directory where only the code of react-app reside.**
+```docker
+docker build -t react-app:0.1 .
 ```
