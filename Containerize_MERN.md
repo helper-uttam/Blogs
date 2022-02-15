@@ -1,5 +1,5 @@
 # How to containerize a MERN stack application?
-If you're the one who's having problem in containerizing a MERN stack application, in this blog we'll containerize the application together. So without further delay let's get started with the pure basic.
+If you're the one who's having problem in containerizing a MERN stack application, then I got you! In this blog we'll containerize a MERN stack application together. So without further delay let's get started with the pure basic.
 
 # What is MERN stack?
 Each letter of the MERN stands for a specific technology, which are **M**ongoDB, **E**xpress, **R**eactJS, **N**odeJS MERN stack is a combined pack of client side application(frontend), a backend server(built with ExpressJS & NodeJS) and a database(MongoDB). 
@@ -86,7 +86,7 @@ services:
     depends_on:
       - mongo
   mongo:
-    #instead of build we're using image because we're using the official image of MongoDB
+    #instead of build tag we're using image tag because we're using the official image of MongoDB
     #this will pull the official image from the docker hub.
     image: mongo:4.4-bionic
     ports:
