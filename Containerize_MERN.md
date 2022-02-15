@@ -18,6 +18,7 @@ There are many benefits of containerizing an application, but let's discuss a fe
 
 ### Let's containerize the application:
 We're going to set up 3 containers for Mongo, express-server, and our react-app. 
+
 #### 1. So, let's containerize our react-app first. 
 It's quite simple to dockerize a react-app with a `Dockerfile`.
 ```yml
@@ -47,6 +48,36 @@ It's quite simple to dockerize a react-app with a `Dockerfile`.
 Now with the help of this `Dockerfile` we can build and containerize our react-app, **to build this application using Dockerfile run this command inside your client directory where only the code of react-app reside.**
 ```docker
 docker build -t react-app:0.1 .
+```
+
+#### 2. Let's containerize the express-server 
+Let's make a `Dockerfile` to build and containerize our server image.
+
+```yml
+#here we're specifying the version of node
+#we can use the :latest tag as well.
+FROM node:14-slim
+
+#here we're defining the working directory
+WORKDIR /user/src/app
+
+#copying our dependencies to the container
+COPY ./package.json ./
+COPY ./package-lock.json ./
+
+#installing all the dependencies that we copied 
+RUN npm install
+
+
+#copying all the files inside the container
+COPY . .
+
+#exposing the port so we can access it further
+EXPOSE 5000
+
+#starting the server
+CMD ["node", "server.js"]
+
 ```
 
 #### 3. Defining different services that will enable our containers to talk with each other. 
