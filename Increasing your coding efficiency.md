@@ -21,7 +21,10 @@ I know these processes are tedious and will take time, but trust me there is not
 The main aim of [Codiga](https://www.codiga.io/) is to enable developers in writing better code faster.  
 
 # How does it work?
+You might be thinking that how Codiga works, **do it uses our data to train its AI model or recommended systems, that suggest us code snippets?**
 
+The answer is pretty straight forward, **No** it don't uses any AI based algorithm and hence you don't have to worry about your data. Under the hood it works in a way such that it detects whatever IDE you're using and then the language of the file using their respeftive file extensions. And now it is upto the you that which recepie you want to cook inside your IDE. Let us assume that you are working JavaScript, more specifically ReactJs/NextJs and you want the snippet of functional component.
+From here you only have to type `.` or `/` and it will start recommending a bunch of snippets but you have to more specific to get the specific snippets. So start by writing `.language_name`
 
 # What are the features that it provides? 
 After understanding the flow/working of Codiga, you might have got some ideas about the benefits that you can get via this tool. If not then let's go through them one by one,
