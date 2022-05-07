@@ -18,8 +18,12 @@ I know these processes are tedious and will take time, but trust me there is not
 
 
 # [![Typing SVG](https://readme-typing-svg.herokuapp.com?size=24&width=600&lines=C+o+d+i+g+a)](https://git.io/typing-svg)
-The main aim of [Codiga](https://www.codiga.io/) is to enable developers in writing better code faster.  
-
+<table>
+  <tr>
+    <td><img src="./assets/codiga.png" alt="codiga"></td>
+    <td>The main aim of <a href="https://www.codiga.io/">Codiga</a> is to enable developers in writing better code faster. </td> 
+  </tr>
+</table>
 # How does it work?
 You might be thinking that how Codiga works, **do it uses our data to train its AI model or recommended systems**, that suggest to us code snippets?
 
