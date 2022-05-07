@@ -38,18 +38,25 @@ fetch('urlToFetch')
 After understanding the flow/working of Codiga, you might have got some ideas about the benefits that you can get via this tool. If not then let's go through them one by one,
 * Ensures high-quality Code 
 > You can make use of the code snippets that are written by top-notch engineers.
-* Increases productivity by more than 40times (>40x)
+* Increases productivity by more than 10times (>10x)
 > As it recommends many snippets that might take you more than a min to write, using the power of Codiga you end up in less than 1sec. 
 * Context-based suggestions
 > Code Snippets are suggested in your IDE context: language, filename, and dependencies
 * Supports more than 15 Languages/Frameworks
 > These languages include JavaScript(React, Next, etc), Python, GO, YAML, Java, and many more. 
+* Add your own code snippets in seconds
+> You may keep them private or share them with your friends and team without leaving your developer environment.
+* Automated Code Reviews
+> From every Commit and Pull Request Codiga surface the most pernicious defects on your projects. Codiga analysis engine is available anywhere developers read or write code by installing a plugin in your developer environment.
 * Flexible and Scalable
 > Codiga lets you create Code Snippets suggestions for you and your team and it's very easy to set up.
 You may refer to this [article](https://dev.to/theinfosecguy/create-use-code-snippets-using-codiga-code-snippets-oa7) in case you wish to start creating and using code snippets immediately.
 
 
 # What are the problems that it solves? 
-
+We have discussed few points in the **How can we increase our efficiency when writing code?** section and we saw that it is a time taking process. But considering the aim of Codiga which says it enables developer's in writing better code faster. With Codiga you can 
+* write high quality code by importing Smart Code Snippets, 
+* increase your productivity by more than 10times,
+* speed up your coding
 
 ### We can't wait to see what reciepe's/cookbook's you are planning to prepare for the world of developers!
