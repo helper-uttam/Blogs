@@ -31,12 +31,8 @@ The answer is pretty straightforward, **No it doesn't** use any AI-based algorit
 
 Let us assume that you are working on JavaScript and you want the snippet of fetch function to make a get request to some server. To achieve this, you only have to type `"."` or `"/"` and it will start recommending a bunch of snippets but you have to be more specific to get the specific snippets. So start by writing `.request.get` or `.fetch` and it'll recommend you the snippet for the fetch function to make a `GET` request, the only thing now you have to do is press `enter` and select our appropriate snippets. After selecting the `.request.get`, you will end up writing code for making a`GET` request.
 
-Let's look at one example of a snippet that will be generated after you select `.request.get`:
-```js
-fetch('urlToFetch')
-  .then(response => response.json())
-  .then(data => console.log(data));
-```
+Let's look at one example where I'll create a complete end to end ExpressJS application using **Codiga** in less than a minute,
+<img src="./assets/codiga.gif">
 
 # What are the features that it provides? 
 After understanding the flow/working of Codiga, you might have got some ideas about the benefits that you can get via this tool. If not then let's go through them one by one,
