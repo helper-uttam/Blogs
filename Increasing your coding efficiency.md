@@ -39,7 +39,7 @@ fetch('urlToFetch')
 ```
 
 ### Hands on an example to demonstrate the power of Codiga
-Let's look at one example where I'll create a complete end to end ExpressJS application using **Codiga** in less than a minute,
+Let's look at one example where we'll write code for creating a complete end to end ExpressJS application and connect it to our local MongoDB using **Codiga** in less than a minute,
 <img src="./assets/codiga.gif">
 
 # What are the features that it provides? 
